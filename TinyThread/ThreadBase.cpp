@@ -4,13 +4,13 @@
 class ThreadData
 {
 public:
-    ThreadBase*     threadBase_;
+    IThreadBase*     threadBase_;
 };
 
 DWORD WINAPI ThreadProc(LPVOID lpParameter)
 {
     ThreadData* pData = reinterpret_cast<ThreadData*>(lpParameter);
-    ThreadBase* pBase = pData->threadBase_;
+    IThreadBase* pBase = pData->threadBase_;
     delete pData;
 
     pBase->threadID_ = GetCurrentThreadId();
@@ -21,14 +21,14 @@ DWORD WINAPI ThreadProc(LPVOID lpParameter)
 }
 
 
-ThreadBase::ThreadBase( const wstring& name /*= _T("")*/ )
+IThreadBase::IThreadBase( const wstring& name /*= _T("")*/ )
 :threadName_(name), threadID_(-1), event_(FALSE, FALSE),
 thread_(INVALID_HANDLE_VALUE)
 {
 }
 
 
-bool ThreadBase::Start(Options op /*= Options()*/)
+bool IThreadBase::Start(Options op /*= Options()*/)
 {
     ThreadData* data    = new ThreadData;
     data->threadBase_   = this;
@@ -48,7 +48,7 @@ bool ThreadBase::Start(Options op /*= Options()*/)
     return true;
 }
 
-void ThreadBase::Join(int waitTimes)
+void IThreadBase::Join(int waitTimes)
 {
     DWORD dw = WaitForSingleObject(thread_, waitTimes);
     if (dw == WAIT_TIMEOUT)
@@ -56,7 +56,7 @@ void ThreadBase::Join(int waitTimes)
     thread_ = INVALID_HANDLE_VALUE;
 }
 
-void ThreadBase::SetPriority( int priority )
+void IThreadBase::SetPriority( int priority )
 {
     SetThreadPriority(thread_, priority);
 }

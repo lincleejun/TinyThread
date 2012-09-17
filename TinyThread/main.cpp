@@ -51,6 +51,10 @@ int main()
     testThread.Join();
 
     TestThreadPool();
+
+    CTestLockTime testLockTime;
+    testLockTime.Start();
+    testLockTime.Join();
     cout << "end test :" << endl;
     return 0;
 }

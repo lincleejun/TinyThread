@@ -27,11 +27,10 @@ public:
 		::LeaveCriticalSection(&m_Lock);
 	}
 
-	BOOL TestLock()
+	BOOL TryLock()
 	{
 		return ::TryEnterCriticalSection(&m_Lock);
 	}
-
 
 private:
 	CRITICAL_SECTION m_Lock;
