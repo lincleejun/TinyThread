@@ -185,6 +185,14 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\dirs.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\dirs.h"
+				>
+			</File>
+			<File
 				RelativePath=".\IThread.h"
 				>
 			</File>
@@ -206,6 +214,10 @@
 			</File>
 			<File
 				RelativePath=".\RefCounter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\stringConvert.h"
 				>
 			</File>
 			<File

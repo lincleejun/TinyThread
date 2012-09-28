@@ -14,6 +14,32 @@ static const TCHAR* s_logInfo[] = {
     _T("LOG_FATAL"),
 };
 
+namespace internal
+{
+    // log实际写的类，
+class CLog
+{
+public:
+    /**
+    *	\brief      
+    *	\param[in]  log文件名
+    */
+    CLog(const TCHAR* fileName);
+    ~CLog();
+
+    bool Open(const TCHAR* fileName);
+    int Write(LOG_LEVEL logLevel, const TCHAR* data, int len);
+    void Close();
+
+protected:
+
+private:
+    CSimpleLock m_lock;
+    HANDLE      m_hFile;
+};
+
+}
+
 internal::CLog* Log()
 {
     static internal::CLog log(LOG_FILE_NAME);
